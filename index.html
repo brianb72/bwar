@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BWAR</title>
+
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- background-image: url("https://i.stack.imgur.com/MnyxU.gif"); -->
+  <style>
+    body,
+    html {
+      height: 100%;
+    }
+    #page {
+      display: none;
+    }
+    #loading {
+      display: flex;
+      position: fixed;
+      z-index: 100;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(192, 192, 192, 0.5);
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="page" class="container-fluid h-100 p-0">
+    <div class="row h-100 no-gutters">
+      <div class="col-sm-9 border" id="divmainmap"></div>
+      <div class="col-sm-3">
+
+        <div class="container-fluid">
+          <!-- Unit Information -->
+          <div class="row no-gutters my-3" style="height:135px;">
+            <div class="col-sm-5 ">
+              <div class="row h-75 no-gutters">
+                <div class="col-sm-12 text-center border" id="sel_counter"></div>
+              </div>
+              <div class="row h-25 no-gutters">
+                <div class="col-sm-12 text-center border" id="sel_symbol_name">NATO Icon</div>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="row h-25 no-gutters border">
+                <div class="col-md-12 pl-3" id="sel_force_name">Force Name</div>
+              </div>
+              <div class="row h-25 no-gutters border">
+                <div class="col-md-12 pl-3" id="sel_formation_name">Formation Name</div>
+              </div>
+              <div class="row h-25 no-gutters border">
+                <div class="col-md-12 pl-3" id="sel_unit_name">Unit Name</div>
+              </div>
+              <div class="row h-25 no-gutters border">
+                <div class="col-md-12 pl-3" id="sel_misc_text">Misc Text</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tile Information -->
+          <div class="row no-gutters my-3" style="height:135px;">
+            <div class="col-sm-5 border">
+              <div class="row h-75 no-gutters">
+                <div class="col-sm-12 text-center" id="sel_tile"></div>
+              </div>
+              <div class="row h-25 no-gutters">
+                <div class="col-sm-12 text-center" id="sel_tile_name">Tile Name</div>
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <!-- Unit Pathfinding Toggle -->
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="switchUnitMovement">
+                <label class="form-check-label" for="switchUnitMovement">Unit Movement</label>
+              </div>
+
+              <!-- Force Overlay Dropdown Button -->
+              <div class="dropdown pt-3">
+                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Overlays
+                      </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" id="overlay-none">None</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" id="overlay-combined">Combined</a></li>
+                  <li><a class="dropdown-item" id="overlay-personnel">Personnel</a></li>
+                  <li><a class="dropdown-item" id="overlay-tank">Tank</a></li>
+                </ul>
+              </div>          
+
+              <div class="pt-3">
+                <button class="btn btn-sm btn-secondary" type="button" id="buttonShowHQ">
+                  HQ To Top
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- OOB -->
+          <div class="row no-gutters" style=>
+            <div class="col-sm-12">
+              <div class='text-center text-white bg-dark'>Order of Battle</div>
+              <div class="container-fluid p-0">
+                <div id="oob_tree" style="height: 550px; overflow-y:auto;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div id="loading" class="center">LOADING...</div>
+
+
+
+  <!-- CDN Libs -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"
+    integrity="sha512-Hyk+1XSRfagqzuSHE8M856g295mX1i5rfSV5yRugcYFlvQiE3BKgg5oFRfX45s7I8qzMYFa8gbFy9xMFbX7Lqw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.2/svg.min.js"
+    integrity="sha512-I+rKw3hArzZIHzrkdELbKqrXfkSvw/h0lW/GgB8FThaBVz2e5ZUlSW8kY8v3q6wq37eybIwyufkEZxe4qSlGcg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tinyqueue@2.0.3/tinyqueue.min.js"></script>
+
+  <!-- My Scripts -->
+  <script type="module" src="js/index.js"></script>
+</body>
+
+</html>
