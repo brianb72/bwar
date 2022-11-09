@@ -16,6 +16,11 @@ I also made use of the SVG.JS library:
 
 * https://svgjs.dev/docs/3.0/
 
+# Live demo
+
+A live demo can be viewed at:
+
+* __http://bwar.herokuapp.com__
 
 
 # Scenarios
