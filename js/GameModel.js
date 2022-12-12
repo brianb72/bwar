@@ -1,7 +1,7 @@
-import { Coordinates } from './Coordinates';
-import { Hex, Unit, TerrainData } from './models';
-import { OrderOfBattle } from './OrderOfBattle';
-import { NatoUnitIcons, NatoUnitTypes } from './NatoUnitIcons';
+import { Coordinates } from './Coordinates.js';
+import { Hex, Unit, TerrainData } from './models.js';
+import { OrderOfBattle } from './OrderOfBattle.js';
+import { NatoUnitIcons, NatoUnitTypes } from './NatoUnitIcons.js';
 
 class GameModel extends Coordinates {
     constructor(controller, scenario) {

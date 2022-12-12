@@ -1,4 +1,4 @@
-import { GameController } from './GameController'
+import { GameController } from './GameController.js'
 import ScenarioCrusader41 from '../scenarios/ScenarioCrusader41.js'
 
 

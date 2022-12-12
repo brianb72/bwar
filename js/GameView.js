@@ -1,6 +1,6 @@
-import { Coordinates } from './Coordinates'
-import { TerrainData, UnitSize } from './models'
-import { NatoUnitIcons } from './NatoUnitIcons'
+import { Coordinates } from './Coordinates.js'
+import { TerrainData, UnitSize } from './models.js'
+import { NatoUnitIcons } from './NatoUnitIcons.js'
 
 const HEXPIXELRADIUS = 57
 

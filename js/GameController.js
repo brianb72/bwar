@@ -1,6 +1,6 @@
-import { GameModel } from './GameModel'
-import { GameView, VIEWCONFIG } from './GameView'
-import { Coordinates } from './Coordinates'
+import { GameModel } from './GameModel.js'
+import { GameView, VIEWCONFIG } from './GameView.js'
+import { Coordinates } from './Coordinates.js'
 
 class GameController extends Coordinates {
     constructor(scenario) {

@@ -1,4 +1,4 @@
-import { Unit } from './models';
+import { Unit } from './models.js';
 
 const arrayStringToInt = (arr) => {
     for (let i = 0; i < arr.length; ++i) {
