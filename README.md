@@ -20,7 +20,7 @@ I also made use of the SVG.JS library:
 
 A live demo can be viewed at:
 
-* __http://bwar.herokuapp.com__
+* __https://exquisite-stroopwafel-f79422.netlify.app/__
 
 
 # Scenarios
